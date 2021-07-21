@@ -260,6 +260,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
     // common bigraphs that contain home row mods on same hand
     // ou, in, st, en
+  case KC_M:
+    // om bigraph
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+	unregister_mods(MOD_BIT(KC_RGUI));
+	tap_code(KC_O);
+	tap_code(KC_M);
+	add_mods(MOD_BIT(KC_RGUI));
+	return false;
+      }
+    }
+    return true;
   case KC_U:
     // handle ou case and send ou for gui right+u
     if (record->tap.count > 0) {

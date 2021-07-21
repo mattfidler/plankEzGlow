@@ -473,13 +473,11 @@ void dance_k_finished(qk_tap_dance_state_t *state, void *user_data);
 void dance_k_reset(qk_tap_dance_state_t *state, void *user_data);
 
 void on_dance_k(qk_tap_dance_state_t *state, void *user_data) {
-    if(state->count == 3) {
+    if(state->count >= 3) {
+      tap_code16(KC_APPLICATION);
+      for (i = 2; i < state->count; i++) {
         tap_code16(KC_K);
-        tap_code16(KC_K);
-        tap_code16(KC_K);
-    }
-    if(state->count > 3) {
-        tap_code16(KC_K);
+      }
     }
 }
 

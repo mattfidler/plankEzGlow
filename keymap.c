@@ -321,6 +321,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	tap_code(KC_I);
 	tap_code(KC_N);
 	add_mods(MOD_BIT(KC_RALT));
+	return false;
+      } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+	unregister_mods(MOD_BIT(KC_RGUI));
+	tap_code(KC_O);
+	tap_code(KC_N);
+	add_mods(MOD_BIT(KC_RGUI));
+	return false;
       }
     }
     return true; 

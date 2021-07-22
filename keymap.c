@@ -90,10 +90,11 @@ enum planck_layers {
 
 #define HM_N RSFT_T(KC_N)
 #define HM_E RCTL_T(KC_E)
-#define HM_I LALT_T(KC_I)
+#define HM_I RALT_T(KC_I)
 #define HM_O RGUI_T(KC_O)
 
-#define BS_X RALT_T(KC_X)
+#define BS_DOT KC_DOT
+#define BS_X KC_X
 #define BS_M LT(10,KC_M)
 
 
@@ -101,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
     TD_Q, KC_W, KC_F, KC_P, KC_G, TRNS, TRNS, TD_J, KC_L, KC_U, KC_Y, KC_QUOTE,       
     HM_A, HM_R, HM_S, HM_T, KC_D, TRNS, TRNS, KC_H, HM_N, HM_E, HM_I, HM_O,   
-    KC_Z, BS_X, KC_C, TD_V, KC_B, TRNS, TRNS, TD_K, BS_M,    KC_COMMA,       RALT_T(KC_DOT), KC_SLASH,       
+    KC_Z, BS_X, KC_C, TD_V, KC_B, TRNS, TRNS, TD_K, BS_M,    KC_COMMA,       BS_DOT, KC_SLASH,       
     TRNS, TRNS, LT(9,KC_DELETE),LT(7,KC_BSPACE),LT(8,KC_ENTER), TRNS, NONE,          LT(5,KC_TAB),   LT(4,KC_SPACE), LT(6,KC_ESCAPE),TRNS, TRNS
   ),
 
@@ -251,6 +252,16 @@ void rgb_matrix_indicators_user(void) {
   }
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case HM_T:
+  case HM_N:
+    return TAPPING_TERM;
+  default:
+    return TAPPING_TERM + 50;
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
   case RGB_SLD:
@@ -298,8 +309,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true; 
   case HM_N:
     // handle en and in
-    // the right alt and left alt has the altgr
-    // because of the altgr I cannot determine (by this method) if they pressed in or rn
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RCTL)) {
 	unregister_mods(MOD_BIT(KC_RCTL));
@@ -307,7 +316,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	tap_code(KC_N);
 	add_mods(MOD_BIT(KC_RCTL));
 	return false;
-      } 
+      } else if (get_mods() & MOD_BIT(KC_RALT)) {
+	unregister_mods(MOD_BIT(KC_RALT));
+	tap_code(KC_I);
+	tap_code(KC_N);
+	add_mods(MOD_BIT(KC_RALT));
+      }
     }
     return true; 
   }

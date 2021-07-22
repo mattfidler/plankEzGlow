@@ -257,6 +257,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   case HM_T:
   case HM_N:
     return TAPPING_TERM;
+  case HM_O:
+    return TAPPING_TERM + 25;
   default:
     return TAPPING_TERM + 50;
   }
@@ -310,19 +312,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case HM_N:
     // handle en and in
     if (record->tap.count > 0) {
-      if (get_mods() & MOD_BIT(KC_RCTL)) {
+      uint8_t current_mods = get_mods();
+      if (current_mods & MOD_BIT(KC_RCTL)) {
 	unregister_mods(MOD_BIT(KC_RCTL));
 	tap_code(KC_E);
 	tap_code(KC_N);
 	add_mods(MOD_BIT(KC_RCTL));
 	return false;
-      } else if (get_mods() & MOD_BIT(KC_RALT)) {
+      } else if (current_mods & MOD_BIT(KC_RALT)) {
 	unregister_mods(MOD_BIT(KC_RALT));
 	tap_code(KC_I);
 	tap_code(KC_N);
 	add_mods(MOD_BIT(KC_RALT));
 	return false;
-      } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+      } else if (current_mods & MOD_BIT(KC_RGUI)) {
 	unregister_mods(MOD_BIT(KC_RGUI));
 	tap_code(KC_O);
 	tap_code(KC_N);

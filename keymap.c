@@ -422,12 +422,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
   case HM_O:
     if (record->tap.count > 0) {
-      if (get_mods() & MOD_BIT(KC_LALT)) {
+      if (get_mods() & MOD_BIT(KC_RALT)) {
 	// handle io 0.83%
-	unregister_mods(MOD_BIT(KC_LALT));
+	unregister_mods(MOD_BIT(KC_RALT));
 	tap_code(KC_I);
 	tap_code(KC_O);
-	add_mods(MOD_BIT(KC_LALT));
+	add_mods(MOD_BIT(KC_RALT));
 	return false;
       }
     }

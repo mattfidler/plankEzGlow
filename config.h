@@ -13,11 +13,10 @@
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 #define ORYX_CONFIGURATOR
-#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 150
-#define TAPPING_TERM_PER_KEY
-#define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
+
+#define TAPPING_FORCE_HOLD
+
 #define USB_SUSPEND_WAKEUP_DELAY 0
-#define FIRMWARE_VERSION u8"NpWq6/yXOPJ"
+#define FIRMWARE_VERSION u8"NpWq6/q6NK6"
 #define RGB_MATRIX_STARTUP_SPD 60

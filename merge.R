@@ -10,7 +10,9 @@ withr::with_dir(temp.dir, unzip(zip))
 
 key.source <- list.files(temp.dir, pattern="_source", full.names = TRUE)
 
-keymap.c <- readLines(file.path(key.source, "keymap.c"))
+keymap.c <- gsub(" SS_DELAY(100)", "", readLines(file.path(key.source, "keymap.c")), fixed=TRUE)
+keymap.c <- gsub("SEND_STRING(SS_TAP(X_KP_2))", "SEND_STRING(\"matthew.fidler@gmail.com\")",
+                 keymap.c, fixed=TRUE)
 
 w <- which(regexpr("process_record_user", keymap.c) != -1)
 if (length(w) == 1 && keymap.c[w + 9] == "}") {
@@ -57,4 +59,5 @@ if (length(w) > 1 && regexpr("on_dance_", keymap.c[w[1] - 2]) != -1 && keymap.c[
 
 writeLines(keymap.c, "keymap.c")
 writeLines(readLines(file.path(key.source, "rules.mk")), "rules.mk")
-writeLines(readLines(file.path(key.source, "config.h")), "config.h")
+writeLines(c(readLines(file.path(key.source, "config.h")),
+             "#define TAPPING_TERM_PER_KEY"), "config.h")

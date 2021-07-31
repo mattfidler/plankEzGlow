@@ -14,7 +14,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define HM_E RCTL_T(KC_E)
 #define HM_I RALT_T(KC_I)
 #define HM_O RGUI_T(KC_O)
-
+#define LT_SPC LT(4,KC_SPACE)
 // http://norvig.com/mayzner.html
 // th = 3.56% (Alternating hand bigram)
 // he = 3.07% (H is not home row)
@@ -201,8 +201,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
     return true;
+  case LT_SPC:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RSHIFT)) {
+	// n 
+	unregister_mods(MOD_BIT(KC_RSHIFT));
+	tap_code(KC_N);
+	tap_code(KC_SPC);
+	add_mods(MOD_BIT(KC_RSHIFT));
+	return false;
+      } else if (get_mods() & MOD_BIT(KC_LSHIFT)) {
+	// t 
+	unregister_mods(MOD_BIT(KC_LSHIFT));
+	tap_code(KC_T);
+	tap_code(KC_SPC);
+	add_mods(MOD_BIT(KC_LSHIFT));
+	return false;
+      }
+    }
+
   }
   return true;
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case HM_T:
+  case HM_N:
+    return TAPPING_TERM;
+  default:
+    return TAPPING_TERM + 40;
+  }
+}
+
 #undef HM_A
 #undef HM_R 
 #undef HM_S 
@@ -211,4 +242,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #undef HM_E 
 #undef HM_I 
 #undef HM_O 
-}

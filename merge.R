@@ -15,6 +15,12 @@ keymap.c <- gsub("SEND_STRING(SS_TAP(X_KP_2))", "SEND_STRING(\"matthew.fidler@gm
                  keymap.c, fixed=TRUE)
 keymap.c <- gsub("SEND_STRING(SS_TAP(X_KP_1))", "SEND_STRING(\"INTEGER\")",
                  keymap.c, fixed=TRUE)
+keymap.c <- gsub("SEND_STRING(SS_TAP(X_KP_3))", "SEND_STRING(\"PROTECT\")",
+                 keymap.c, fixed=TRUE)
+keymap.c <- gsub("SEND_STRING(SS_TAP(X_KP_4))", "SEND_STRING(\"matt.fidler@novartis.com\")",
+                 keymap.c, fixed=TRUE)
+
+
 
  w <- which(regexpr("process_record_user", keymap.c) != -1)
 if (length(w) == 1 && keymap.c[w + 9] == "}") {

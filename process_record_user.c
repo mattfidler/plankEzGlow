@@ -14,46 +14,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define HM_E RCTL_T(KC_E)
 #define HM_I RALT_T(KC_I)
 #define HM_O RGUI_T(KC_O)
-#define LT_SPC LT(4,KC_SPACE)
+#define LYT_SPC LT(4,KC_SPACE)
+#define LYT_L LT(14,KC_L)
+#define LYT_U LT(2,KC_U)
+#define LYT_M LT(12,KC_M)
+#define LYT_F LT(1,KC_F)
+
+    
 // http://norvig.com/mayzner.html
 // th = 3.56% (Alternating hand bigram)
 // he = 3.07% (H is not home row)
 // in = 2.43%
-// er = 2.05% Alternating hand
-// an = 1.99% Alternating hand
-// re = 1.85% Alternating hand
+// er = 2.05% Alternating hand // ctrl 
+// an = 1.99% Alternating hand // win n
+// re = 1.85% Alternating hand // alt e
 // on = 1.76%
 // at = 1.49%
 // en = 1.45%
-// nd = 1.35% Alternating hand
-// ti = 1.34% Alternating hand
-// es = 1.34% Alternating hand
-// or = 1.28% Alternating hand
-// te = 1.20% Alternating hand
-// of = 1.17% Alternating hand
-// ed = 1.17% Alternating hand
-// is = 1.13% Alternating hand
-// it = 1.12% Alternating hand
-// al = 1.09% Alternating hand
+// nd = 1.35% Alternating hand // D
+// ti = 1.34% Alternating hand // I
+// es = 1.34% Alternating hand // ctrl s
+// or = 1.28% Alternating hand // run command redundant with simple windows key
+// te = 1.20% Alternating hand // E
+// of = 1.17% Alternating hand // win + f
+// ed = 1.17% Alternating hand // ctrl d
+// is = 1.13% Alternating hand // alt s
+// it = 1.12% Alternating hand // alt t
+// al = 1.09% Alternating hand // win l
 // ar = 1.07%
 // st = 1.05%
-// to = 1.04% Alternating hand
-// nt = 1.04% Alternating hand
-// ng = 0.95% Alternating hand
-// se = 0.93% Alternating hand
-// ha = 0.93% Alternating hand
+// to = 1.04% Alternating hand // O
+// nt = 1.04% Alternating hand // T 
+// ng = 0.95% Alternating hand // G
+// se = 0.93% Alternating hand // ctrl e
+// ha = 0.93% Alternating hand // non home row modifiers
 // as = 0.87%
 // ou = 0.87%
 // io = 0.83%
 // le = 0.83% no home row mods
 // ve = 0.83% no home row mods
-// co = 0.79% alternating hands
-// me = 0.79% no home row mods
+// co = 0.79% alternating hands 
+// me = 0.79% no home row mods 
 // de = 0.76% no howe row mods
 // hi = 0.73% no home row mods
-// ri = 0.73% Alternating hands
-// ro = 0.73% Alternating hands
-// ic = 0.70% Alternating hands
+// ri = 0.73% Alternating hands alt i
+// ro = 0.73% Alternating hands alt o
+// ic = 0.70% Alternating hands alt c
 // ne = 0.69%
 
 // Bigrams that do not exist jq, qg, qy, qz, wq, and qz
@@ -63,7 +69,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // ou, in, st, en
   case HM_R:
     if (record->tap.count > 0) {
-      if (get_mods() & MOD_BIT(KC_LGUI)) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+	// or = 1.28% Alternating hand // run command redundant with simple windows key
+	unregister_mods(MOD_BIT(KC_RGUI));
+	tap_code(KC_O);
+	tap_code(KC_R);
+	add_mods(MOD_BIT(KC_RGUI));
+	return false;
+      } else if (get_mods() & MOD_BIT(KC_LGUI)) {
 	// ar 1.07% 
 	unregister_mods(MOD_BIT(KC_LGUI));
 	tap_code(KC_A);
@@ -73,7 +86,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
     return true;
-  case KC_M:
+  case LYT_F:
+    //// of = 1.17% Alternating hand // win + f
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+	unregister_mods(MOD_BIT(KC_RGUI));
+	tap_code(KC_O);
+	tap_code(KC_F);
+	add_mods(MOD_BIT(KC_RGUI));
+	return false;
+      }
+    }
+    return true;
+  case LYT_L:
+    //al = 1.09% Alternating hand
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_LGUI)) {
+	unregister_mods(MOD_BIT(KC_LGUI));
+	tap_code(KC_A);
+	tap_code(KC_L);
+	add_mods(MOD_BIT(KC_LGUI));
+	return false;
+      }
+    }
+    return true;
+  case LYT_M:
     // om bigraph
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
@@ -92,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
     return true;
-  case KC_U:
+  case LYT_U:
     // handle ou case and send ou for gui right+u
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
@@ -135,6 +172,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	tap_code(KC_I);
 	tap_code(KC_N);
 	add_mods(MOD_BIT(KC_RALT));
+	return false;
+      } else if (current_mods & MOD_BIT(KC_LGUI))  {
+	//an = 1.99% Alternating hand
+	unregister_mods(MOD_BIT(KC_LGUI));
+	tap_code(KC_A);
+	tap_code(KC_N);
+	add_mods(MOD_BIT(KC_LGUI));
 	return false;
       } else if (current_mods & MOD_BIT(KC_RGUI)) {
 	// on 1.76%
@@ -201,7 +245,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
     return true;
-  case LT_SPC:
+  case LYT_SPC:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
 	// n 
@@ -219,10 +263,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return false;
       }
     }
-
   }
   return true;
 }
+
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -242,3 +286,4 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #undef HM_E 
 #undef HM_I 
 #undef HM_O 
+

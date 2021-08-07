@@ -274,7 +274,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   case HM_N:
     return TAPPING_TERM;
   default:
-    return TAPPING_TERM + 40;
+    return TAPPING_TERM + 30;
   }
 }
 

@@ -67,6 +67,7 @@ enum planck_keycodes {
   ST_MACRO_16,
   ST_MACRO_17,
   ST_MACRO_18,
+  ST_MACRO_19,
 };
 
 enum tap_dance_codes {
@@ -198,17 +199,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LAYER14] = LAYOUT_planck_grid(
-    KC_NO,          KC_NO,          ST_MACRO_5,     ST_MACRO_6,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
-    ST_MACRO_7,     ST_MACRO_8,     ST_MACRO_9,     ST_MACRO_10,    ST_MACRO_11,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          ST_MACRO_12,    KC_NO,          ST_MACRO_13,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          ST_MACRO_5,     ST_MACRO_6,     ST_MACRO_7,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
+    ST_MACRO_8,     ST_MACRO_9,     ST_MACRO_10,    ST_MACRO_11,    ST_MACRO_12,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          ST_MACRO_13,    KC_NO,          ST_MACRO_14,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
   [_LAYER15] = LAYOUT_planck_grid(
     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          ST_MACRO_14,    KC_NO,          ST_MACRO_15,    KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_16,    ST_MACRO_17,    KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_18,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          ST_MACRO_15,    KC_NO,          ST_MACRO_16,    KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_17,    ST_MACRO_18,    KC_NO,          
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_19,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
 };
@@ -324,83 +325,89 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
     case ST_MACRO_5:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_W)) SS_LSFT(SS_TAP(X_P)) SS_LSFT(SS_TAP(X_M)));
 
     }
     break;
     case ST_MACRO_6:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_P)) SS_LSFT(SS_TAP(X_M)) SS_LSFT(SS_TAP(X_X)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)));
 
     }
     break;
     case ST_MACRO_7:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_I)) SS_LSFT(SS_TAP(X_C)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_P)) SS_LSFT(SS_TAP(X_M)) SS_LSFT(SS_TAP(X_X)));
 
     }
     break;
     case ST_MACRO_8:
     if (record->event.pressed) {
-      SEND_STRING(SS_RSFT(SS_TAP(X_R)) SS_TAP(X_X) SS_RSFT(SS_TAP(X_O)) SS_RSFT(SS_TAP(X_D)) SS_RSFT(SS_TAP(X_E)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_I)) SS_LSFT(SS_TAP(X_C)));
 
     }
     break;
     case ST_MACRO_9:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)) SS_LSFT(SS_TAP(X_X)) SS_LSFT(SS_TAP(X_P)));
+      SEND_STRING(SS_RSFT(SS_TAP(X_R)) SS_TAP(X_X) SS_RSFT(SS_TAP(X_O)) SS_RSFT(SS_TAP(X_D)) SS_RSFT(SS_TAP(X_E)));
 
     }
     break;
     case ST_MACRO_10:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_T)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_E)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)) SS_LSFT(SS_TAP(X_X)) SS_LSFT(SS_TAP(X_P)));
 
     }
     break;
     case ST_MACRO_11:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_D)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_T)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_T)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_E)));
 
     }
     break;
     case ST_MACRO_12:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_C)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_N)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_D)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_T)));
 
     }
     break;
     case ST_MACRO_13:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_B) SS_TAP(X_I) SS_TAP(X_C));
+      SEND_STRING(SS_LSFT(SS_TAP(X_C)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_N)));
 
     }
     break;
     case ST_MACRO_14:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_N)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_L)));
+      SEND_STRING(SS_TAP(X_B) SS_TAP(X_I) SS_TAP(X_C));
 
     }
     break;
     case ST_MACRO_15:
     if (record->event.pressed) {
-      SEND_STRING("INTEGER");
+      SEND_STRING(SS_LSFT(SS_TAP(X_N)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_L)));
 
     }
     break;
     case ST_MACRO_16:
     if (record->event.pressed) {
-      SEND_STRING("matthew.fidler@gmail.com");
+      SEND_STRING("INTEGER");
 
     }
     break;
     case ST_MACRO_17:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_5)) SS_LSFT(SS_TAP(X_DOT)) SS_LSFT(SS_TAP(X_5)));
+      SEND_STRING("matthew.fidler@gmail.com");
 
     }
     break;
     case ST_MACRO_18:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LSFT(SS_TAP(X_5)) SS_LSFT(SS_TAP(X_DOT)) SS_LSFT(SS_TAP(X_5)));
+
+    }
+    break;
+    case ST_MACRO_19:
     if (record->event.pressed) {
       SEND_STRING(SS_LSFT(SS_TAP(X_COMMA)) SS_TAP(X_MINUS));
 
@@ -680,7 +687,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   case HM_N:
     return TAPPING_TERM;
   default:
-    return TAPPING_TERM + 40;
+    return TAPPING_TERM + 30;
   }
 }
 
